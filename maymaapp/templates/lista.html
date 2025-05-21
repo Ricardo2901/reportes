@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lista de lenguajes de programacion</h1>
+    <ul>
+        {% for lenguaje in lenguajes %}
+            {% if lenguajes == "Python" %}
+                <li style="color:blue;">{{ lenguaje }}</li>
+            {% elif lenguajes == "Java" %}
+                <li style="color:green;">{{ lenguaje }}</li>
+            {% elif lenguajes == "C++" %}
+                <li style="color:red;">{{ lenguaje }}</li>
+            {% else %}
+                <li>{{ lenguaje }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

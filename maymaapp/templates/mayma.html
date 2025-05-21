@@ -1,0 +1,72 @@
+{% load static %}
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>{% block title %}Mayma Ambiental{% endblock%}</title>
+</head>
+<body>
+    <!-- Esta es la plantilla padre -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg" style="position: fixed; width: 100%; z-index: 1; background-color: #e9e9e9;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Nombre</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href=" ">Archivos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingUsers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Usuarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingUsers">
+                        <li><a class="dropdown-item" href="">Usuarios</a></li>
+                        <li><a class="dropdown-item" href="">Administradores</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="">Todos los Usuarios</a></li>
+                    </ul>
+                    </li>
+                    
+                </ul>
+                <!-- Mostrar nombre del usuario a la derecha -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="navbarScrollingUsers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Formulario Oculto para Cerrar Sesión -->
+                <form id="logout-form" action="" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <div class="mx-auto" style="width: 95%;">
+        <main>
+            {% block content %}
+
+            {% endblock %}
+        </main>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
