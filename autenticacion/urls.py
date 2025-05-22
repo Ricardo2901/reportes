@@ -20,8 +20,5 @@ from . import views
 
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
-    path('home/', views.home, name='home'),
-    path('reportes', views.reportes, name='reportes'),
-    path('crearReportes', views.crearReportes, name='crearReportes'),
-    path('perfil/', views.verPerfil, name='perfil'),
+    path('login/', views.login, name='login'),
 ]

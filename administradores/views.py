@@ -3,34 +3,35 @@ from django.http import HttpResponse
 from datetime import datetime
 
 # Create your views here
-def indexAdministrador(request):
-    # Render the 'indexAdminnistrador.html' template
-    return render(request, 'indexAdminnistrador.html')
 
-def dashboard(request):
+def index(request): #Para ver la vista de inicio
+    # Render the 'index.html' template
+    return render(request, 'administradores/index.html')
+
+def home(request): #Para ver la vista de inicio
     # Render the 'dashboard.html' template
-    return render(request, 'dashboard.html')
+    return render(request, 'administradores/home.html')
 
-def reportes(request):
+def reportes(request): #Para ver la vista de reportes
     # Render the 'reportes.html' template
-    return render(request, 'reportes.html')
+    return render(request, 'administradores/reportes.html')
 
-def clientes(request):
+def clientes(request): #Para ver la vista de clientes
     # Render the 'clientes.html' template
-    return render(request, 'clientes.html')
+    return render(request, 'administradores/clientes.html')
 
-def usuarios(request):
+def usuarios(request): #Para ver la vista de usuarios
     # Render the 'usuarios.html' template
-    return render(request, 'usuarios.html')
+    return render(request, 'administradores/usuarios.html')
 
-def administradores(request):
+def administradores(request): #Para ver la vista de administradores
     # Render the 'administradores.html' template
-    return render(request, 'administradores.html')
+    return render(request, 'administradores/administradores.html')
 
-def todosUsuarios(request):
+def todosUsuarios(request): #Para ver la vista de todos los usuarios/administradores
     # Render the 'todosUsuarios.html' template
-    return render(request, 'todosUsuarios.html')
+    return render(request, 'administradores/todosUsuarios.html')
 
-def verPerfil(request):
+def verPerfil(request): #Para ver la vista de perfil del usuario autenticado
     # Render the 'verPerfil.html' template
-    return render(request, 'verPerfil.html')
+    return render(request, 'administradores/verPerfil.html')

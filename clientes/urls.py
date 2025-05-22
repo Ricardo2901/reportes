@@ -16,13 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from maymaapp.views import mayma, index, login
+from . import views
 
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
-    path('admin/', admin.site.urls),
-    path('mayma', mayma, name='mayma'),
-    path('index/', index, name='index'),
-    path('login/', login, name='login'),
+    path('reportes', views.reportes, name='reportes'),
+    path('home/', views.home, name='home'),
+    path('perfil/', views.verPerfil, name='perfil'),
 ]

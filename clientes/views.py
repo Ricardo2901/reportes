@@ -3,7 +3,7 @@ from datetime import datetime
 from django.shortcuts import render
 
 # Create your views here.
-def dashboard(request):
+def home(request):
     # Render the 'dashboard.html' template
     return render(request, 'cliente/dashboard.html')
 

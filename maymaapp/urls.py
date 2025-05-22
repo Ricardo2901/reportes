@@ -22,7 +22,12 @@ from maymaapp.views import mayma, index, login
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
-    path('mayma', mayma, name='mayma'),
-    path('index/', index, name='index'),
-    path('login/', login, name='login'),
+
+    # URL globales
+    path('autenticacion/', include('autenticacion.urls')),
+
+    # URLs externas
+    path('administrador/', include('administradores.urls')),
+    path('c/', include('clientes.urls')),
+    path('u/', include('usuarios.urls')),
 ]

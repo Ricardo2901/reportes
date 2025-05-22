@@ -1,0 +1,111 @@
+{% load static %}
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesion</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/image_background.css' %}">
+    <link rel="icon" href="{% static 'images/favicon/vertical-favicon.jpg' %}" type="image/png">
+
+</head>
+<body>
+    <div class="fondo">
+        <br><br>
+        <div class="mx-auto" style="width: 35%; height: 20%; text-align: left;">
+            <div class="card" style="border-radius: 20px;">
+                <img src="{% static 'images/favicon.jpg'%}" class="card-img-top" alt="..." style="border-radius: 20px;">
+                <div class="card-body">
+                    <form action="" method="post">
+                        <h5>Usuario</h5>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Usuario" required>
+                        <br>
+                        <h5>Contraseña</h5>
+                        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Contraseña" required>
+                        <br>
+                        <center>
+                            <h6>Usuario y/o contraseña incorrecta</h6>
+                        </center>
+                        <br>
+                        <center>
+                            <button type="submit" class="btn btn-success">Iniciar Sesión</button> | 
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#olvideContraseña">Olvide la Contraseña</button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- Modal para editar los datos -->
+        <div class="modal fade" id="olvideContraseña" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <form action="" method="post">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Recuperar contraseña</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h6><b>Ingrese los siguientes datos para poder recuperar su contraseña:</b></h6>
+                            <br>
+                            <label fsor="inputPassword5" class="form-label">Usuario</label>
+                            <input name="username" class="form-control" value="" type="text" placeholder="Usuario" aria-label="default input example">
+                            <br>
+                            <label for="inputPassword5" class="form-label">Correo Electronico</label>
+                            <input name="name" class="form-control" value="" type="text" placeholder="Correo Electronico" aria-label="default input example">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-eliminar" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ok">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal fade" id="ok" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Recuperar contraseña</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" text-align="justify">
+                         Se ha enviado un correo a su bandeja de entrada para poder recuperar su contraseña.
+                        Por favor revise su bandeja de entrada.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-eliminar" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <footer class="bg-body-tertiary text-center text-lg-start footer">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2025 Copyright: Mayma Ambiental - Todos los derechos reservados
+    </div>
+    <!-- Copyright -->
+    </footer>
+
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
