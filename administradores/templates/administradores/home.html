@@ -5,13 +5,27 @@
 {% load django_browser_reload %}
 {% django_browser_reload_script %}
 
-
 {% block title %}Home{% endblock %}
 
 {% block content %}
     <div class="container mt-5">
         <h1>Bienvenido: Nombre del Usuario</h1>
         <p>Aqui es donde el administrador tiene el control total del sistema</p>
+        <br>
+        <button type="button" class="btn btn-primary" id="liveToastBtn">Ver Actualizaciones</button>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    
+                    <strong class="me-auto">Mayma Ambiental</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Buenos dias, este es un mensaje de prueba para el administrador.
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container mt-5">
         <div class="card">
@@ -160,5 +174,18 @@
             <br>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toastTrigger = document.getElementById('liveToastBtn');
+            const toastLive = document.getElementById('liveToast');
+
+            if (toastTrigger && toastLive) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show();
+            });
+            }
+        });
+    </script>
     <br>
 {% endblock %}

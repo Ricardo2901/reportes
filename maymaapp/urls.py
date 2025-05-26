@@ -27,7 +27,10 @@ urlpatterns = [
     path('autenticacion/', include('autenticacion.urls')),
 
     # URLs externas
-    path('administrador/', include('administradores.urls')),
-    path('c/', include('clientes.urls')),
-    path('u/', include('usuarios.urls')),
+    path('mayma/a/', include(('administradores.urls', 'administradores'), namespace='adm')),
+    #path('mayma/a/', include('administradores.urls')),
+    path('mayma/c/', include(('clientes.urls', 'clientes'), namespace='clt')),
+    #path('mayma/c/', include('clientes.urls')),
+    path('mayma/u/', include(('usuarios.urls', 'usuarios'), namespace='usr')),
+    #path('mayma/u/', include('usuarios.urls')),
 ]

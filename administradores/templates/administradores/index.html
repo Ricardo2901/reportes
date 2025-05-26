@@ -12,7 +12,7 @@
     <link href="{% static 'images/vertical-favicon.jpg' %}" rel="icon" type="image/jpg">
 </head>
 <body>
-    <nav class="navbar bg-body-tertiary fixed-top">
+    <nav class="navbar bg-body-secondary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Mayma Ambiental</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -26,29 +26,35 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'adm:home' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Crear un reporte</a>
+                            <a class="nav-link" href="">Crear un reporte</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Reportes</a>
+                            <a class="nav-link" href="{% url 'adm:reportes' %}">Reportes</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Usuarios
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="#">Admninistradores</a></li>
+                                <li><a class="dropdown-item" href="{% url 'adm:usuarios' %}">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="{% url 'adm:administradores' %}">Admninistradores</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Todos los usuarios</a></li>
+                                <li><a class="dropdown-item" href="{% url 'adm:todosUsuarios' %}">Todos los usuarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ver Perfil</a>
+                            <a class="nav-link" href="{% url 'adm:perfil' %}">Ver Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="%">Acerca de la aplicacion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="%" data-bs-toggle="modal" data-bs-target="#abrirConsola">Abrir consola</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Salir</a>
@@ -68,6 +74,85 @@
         </main>
     </div>
 
+    <!-- Modal para editar los datos -->
+    <div class="modal fade" id="abrirConsola" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form action="" method="post">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable" style="height: 90vh;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Terminal del Sistema</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="background-color: black; color: #00FF00; font-family: Consolas;">
+                        <div class="row mb-3">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">mayma/admin/@usuario~$ </label>
+                            <div class="col-sm-10">
+                                <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    id="colFormLabelSm" 
+                                    style="
+                                        background-color: black;
+                                        color: #00ff00;
+                                        font-family: 'Consolas', monospace;
+                                        border: none;
+                                        outline: none;
+                                        box-shadow: none;
+                                        font-size: 16px;
+                                        caret-color: #00ff00;
+                                        width: 100%;
+                                        "
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const terminal = document.getElementById('terminal');
+
+            terminal.addEventListener('keydown', function (e) {
+            const activeInput = e.target;
+
+            if (e.key === 'Enter' && activeInput.classList.contains('console-input')) {
+                e.preventDefault();
+
+                // Crear una nueva línea solo si está vacío
+                if (activeInput.value.trim() === '') {
+                const newLine = document.createElement('div');
+                newLine.className = 'd-flex align-items-center gap-2 mb-2';
+
+                const label = document.createElement('span');
+                label.textContent = 'Consola del sistema:';
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control console-input';
+                input.style.backgroundColor = 'black';
+                input.style.color = '#00ff00';
+                input.style.fontFamily = 'Consolas';
+                input.style.border = 'none';
+                input.style.outline = 'none';
+                input.style.boxShadow = 'none';
+
+                newLine.appendChild(label);
+                newLine.appendChild(input);
+                terminal.appendChild(newLine);
+
+                input.focus();
+                }
+            }
+            });
+        });
+    </script>
+
 </body>
 </html>

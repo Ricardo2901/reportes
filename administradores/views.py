@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
+from django.urls import reverse
 
 # Create your views here
 
@@ -10,6 +11,7 @@ def index(request): #Para ver la vista de inicio
 
 def home(request): #Para ver la vista de inicio
     # Render the 'dashboard.html' template
+    
     return render(request, 'administradores/home.html')
 
 def reportes(request): #Para ver la vista de reportes
@@ -22,11 +24,11 @@ def clientes(request): #Para ver la vista de clientes
 
 def usuarios(request): #Para ver la vista de usuarios
     # Render the 'usuarios.html' template
-    return render(request, 'administradores/usuarios.html')
+    return render(request, 'administradores/users.html')
 
 def administradores(request): #Para ver la vista de administradores
     # Render the 'administradores.html' template
-    return render(request, 'administradores/administradores.html')
+    return render(request, 'administradores/admin.html')
 
 def todosUsuarios(request): #Para ver la vista de todos los usuarios/administradores
     # Render the 'todosUsuarios.html' template
@@ -34,4 +36,4 @@ def todosUsuarios(request): #Para ver la vista de todos los usuarios/administrad
 
 def verPerfil(request): #Para ver la vista de perfil del usuario autenticado
     # Render the 'verPerfil.html' template
-    return render(request, 'administradores/verPerfil.html')
+    return render(request, 'administradores/profile.html')
