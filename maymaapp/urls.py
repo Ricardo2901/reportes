@@ -17,14 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from maymaapp.views import mayma, index, login
+from . import views
 
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
 
     # URL globales
-    path('autenticacion/', include('autenticacion.urls')),
+    path('mayma/auth/', include('autenticacion.urls')),
+    path('mayma/', views.mayma, name='mayma'),
+    path('mayma/index/', views.index, name='index'),
 
     # URLs externas
     path('mayma/a/', include(('administradores.urls', 'administradores'), namespace='adm')),

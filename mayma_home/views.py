@@ -9,9 +9,5 @@ def mayma(request): # Vista de inicio (principal)
 def index(request): # Vista de inicio
     # Render the 'index.html' template
     return render(request, 'index.html')
-
-def login(request): # Vista de inicio de sesión
-    # Render the 'login.html' template
-    return render(request, 'login.html')
     
 

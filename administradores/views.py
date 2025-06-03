@@ -18,6 +18,10 @@ def reportes(request): #Para ver la vista de reportes
     # Render the 'reportes.html' template
     return render(request, 'administradores/reportes.html')
 
+def crearReporte(request): #Para ver la vista de crear reporte
+    # Render the 'crearReporte.html' template
+    return render(request, 'administradores/reportesForm.html')
+
 def clientes(request): #Para ver la vista de clientes
     # Render the 'clientes.html' template
     return render(request, 'administradores/clientes.html')
@@ -37,3 +41,7 @@ def todosUsuarios(request): #Para ver la vista de todos los usuarios/administrad
 def verPerfil(request): #Para ver la vista de perfil del usuario autenticado
     # Render the 'verPerfil.html' template
     return render(request, 'administradores/profile.html')
+
+def acercaAplicacion(request):
+    #Render the 'acercaApp.html' template
+    return render(request, 'administradores/acercaApp.html')

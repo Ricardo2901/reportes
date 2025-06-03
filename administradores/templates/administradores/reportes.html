@@ -1,0 +1,45 @@
+{% extends 'administradores/index.html' %}
+
+{% load static %}
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
+
+{% block title %}Reportes{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Lista de reportes</h1>
+        <p>Aqui se mostraran todos los reportes que se han generado por parte de los trabajadores</p>
+        <br>
+        <a href="{% url 'adm:crearReporte' %}" class="btn btn-success">Generar Reporte</a>
+    </div>
+    <br>
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Nombre</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Actulización</th>
+                <th>Autor</th>
+                <th><center>Acciones</center></th>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Reporte 1</td>
+                    <td>29 / 10 / 2021</td>
+                    <td>30 / 01 / 2025</td>
+                    <td>Autor 1</td>
+                    <td>
+                        <center>
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#verDatos">Ver</button>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"><center>No hay datos que mostrar</center></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

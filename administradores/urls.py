@@ -28,5 +28,7 @@ urlpatterns = [
     path('todosUsuarios/', views.todosUsuarios, name='todosUsuarios'),
     path('clientes/', views.clientes, name='clientes'),
     path('reportes/', views.reportes, name='reportes'),
+    path('crearReporte/', views.crearReporte, name='crearReporte'),
     path('perfil/', views.verPerfil, name='perfil'),
+    path('acercaApp/', views.acercaAplicacion, name='acercaApp'),
 ]

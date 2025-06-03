@@ -1,0 +1,159 @@
+{% extends 'administradores/index.html' %}
+
+{% load static %}
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
+
+{% block title %}Generar un reporte{% endblock %}
+
+<script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h1>Creacion de Reporte</h1>
+        <p>
+            Tambien el administrador puede hacer un reporte, de acuerdo a lo que pide el cliente
+        </p>
+
+        <div class="card">
+            <div class="card-header">
+                <h6>Por favor selecciona el mapa para ver las coordenadas</h6>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="map" style="height: 65vh; width: 100%; border-radius:0px;">
+                                    <script>
+                                        let municipios;
+                                        
+                                        const map = L.map('map', {
+                                        zoomControl: false,
+                                        dragging: false,
+                                        doubleClickZoom: false,
+                                        scrollWheelZoom: false,
+                                        boxZoom: false,
+                                        keyboard: false,
+                                        touchZoom: false
+                                        });
+
+                                        fetch("{% static 'geojson/coahuila_div_mun.geojson '%}") /* Esta es la capa que se esta importando */
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            municipios = L.geoJSON(data, {
+                                            style: {
+                                                color: 'blue',
+                                                weight: 1.5,
+                                                fillOpacity: 0
+                                            },
+                                            onEachFeature: function (feature, layer) {
+                                                layer.on('click', function (e) {
+                                                    const nombreMunicipio = feature.properties.NAME_2 || 'Nombre no disponible';
+                                                    layer.bindPopup('Municipio: ' + nombreMunicipio).openPopup(e.latlng);
+                                                    document.getElementById('nombre_municipio').value = nombreMunicipio;
+                                                    document.getElementById('lat').value = e.latlng.lat.toFixed(6);
+                                                    document.getElementById('lng').value = e.latlng.lng.toFixed(6);
+                                                    });
+                                                }
+                                            }).addTo(map);
+
+                                            const bounds = municipios.getBounds();
+                                            map.fitBounds(bounds);
+                                            map.setMaxBounds(bounds);
+                                        });
+
+                                        map.on('click', function(e) {
+                                            let clickedInside = false;
+
+                                            municipios.eachLayer(function (layer) {
+                                                if(layer instanceof L.Polygon && layer.getBounds().contains(e.latlng)) {
+                                                    clickedInside = true;
+                                                }
+                                            });
+
+                                            if (!clickedInside) {
+                                                document.getElementById('nombre_municipio').value = 'Fuera del rango';
+                                                document.getElementById('lat').value = e.latlng.lat.toFixed(6);
+                                                document.getElementById('lng').value = e.latlng.lat.toFixed(6);
+                                            }
+                                        })
+
+                                        
+                                        /*
+                                        // Cargar datos del clima y agregarlos al mapa
+                                        fetch("{% static 'geojson/clima.json' %}")
+                                            .then(res => res.json())
+                                            .then(climaData => {
+                                                climaData.forEach(punto => {
+                                                    const lat = parseFloat(punto.lat);
+                                                    const lng = parseFloat(punto.lon);
+                                                    const marcador = L.marker([lat, lng]).addTo(map);
+
+                                                    marcador.bindPopup(`
+                                                        <strong>Municipio:</strong> ${punto.nmun}<br>
+                                                        <strong>Maxima:</strong> ${punto.tmax}°<br>
+                                                        <strong>Minima:</strong> ${punto.tmin}°<br>
+                                                        <strong>Humedad:</strong> ${punto.cc}%
+                                                    `);
+                                                });
+                                            });
+
+                                        // Ejecutar búsqueda cuando el usuario cambia los valores
+                                        document.getElementById('lat').addEventListener('change', buscarMunicipioPorCoordenadas);
+                                        document.getElementById('lng').addEventListener('change', buscarMunicipioPorCoordenadas);
+                                        */
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Datos del reporte</h6>
+                            </div>
+                            <div class="card-body">
+                                <label>Latitud</label>
+                                <input type="text" class="form-control" id="lat" placeholder="Latitud" required>
+                                <br>
+                                <span>Longitud</span>
+                                <input type="text" class="form-control" id="lng" placeholder="Longitud" required>
+                                <br>
+                                <span>Municipio</span>
+                                <input type="text" class="form-control" id="nombre_municipio" placeholder="Municipio seleccionado" readonly />
+                                <br>
+                                <span>Temperatura</span>
+                                <input type="text" class="form-control" name="temperatura" placeholder="Temperatura" id="" required>
+                                <br>
+                                <span>Vegetación</span>
+                                <input type="text" class="form-control" name="vegetacion" placeholder="Vegetacion" required>
+                                <br>
+                                <span>Actividades a realizar:</span>
+                                <textarea name="actividades" class="form-control"></textarea>
+                                <br>
+                                <a href="{% url 'adm:reportes' %}" class="btn btn-secondary">Regresar</a> | 
+                                <button type="submit" class="btn btn-success">Generar Reporte</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 
+                <div class="">
+                    <label>Latitud:</label>
+                    <input type="text" id="lat" readonly>
+                    <label>Longitud:</label>
+                    <input type="text" id="lng" readonly>
+                    <label for="">Municipio</label>
+                    <input type="text" id="nombre_municipio" placeholder="Municipio seleccionado" readonly />
+                </div>
+                 -->
+                
+            </div>
+            
+        </div>
+    </div>
+    
+    
+{% endblock %}
